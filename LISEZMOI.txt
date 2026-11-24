@@ -1,0 +1,12 @@
+Cap sur l'IPSA : version de présentation
+
+Logo : le site affiche automatiquement le logo officiel s'il trouve le fichier
+assets/logo-ipsa.svg (ou assets/logo-ipsa.png). Dépose le fichier fourni par le
+service communication de l'IPSA dans le dossier assets, puis recharge la page.
+
+Pour ouvrir le site en local (les textures de la Terre en ont besoin) :
+  dans ce dossier, lancer « python3 -m http.server 8000 »
+  puis ouvrir http://localhost:8000 dans le navigateur.
+
+Copilote : sur claude.ai, il rédige ses réponses avec Claude à partir des fiches.
+Hors de claude.ai, il passe en « mode fiches » et cite directement les fiches.
