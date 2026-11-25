@@ -9,8 +9,8 @@
   --ion:#6FD6FF;
   --line:rgba(236,231,220,.14);
   --panel:rgba(7,10,18,.66);
-  --display:"Bricolage Grotesque",system-ui,sans-serif;
-  --body:"Instrument Sans",system-ui,sans-serif;
+  --display:"Bricolage Grotesque Variable","Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Instrument Sans Variable","Instrument Sans",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
   color-scheme:dark;
 }

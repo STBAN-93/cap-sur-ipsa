@@ -598,12 +598,12 @@ function loadTex(url,cb){texLoader.load(url,function(t){t.anisotropy=Math.min(8,
   var m=base.material;
   m.color.set(0x0b1a33);m.emissive.set(0x061530);m.emissiveIntensity=.45;
   var big=(renderer.capabilities.maxTextureSize>=8192)&&window.innerWidth>=900;
-  loadTex(big?'assets/earth-8k.jpg':'assets/earth-4k.jpg',function(t){
+  loadTex(big?'assets/earth-8k.webp':'assets/earth-4k.webp',function(t){
     t.wrapS=THREE.RepeatWrapping;t.offset.x=.25;
     m.map=t;m.color.set(0xc4c4c4);m.emissive.set(0xffffff);m.emissiveIntensity=.3;m.roughness=1;m.needsUpdate=true;
-    loadTex('assets/earth-emissive.jpg',function(e){e.wrapS=THREE.RepeatWrapping;e.offset.x=.25;m.emissiveMap=e;m.needsUpdate=true;});
-    loadTex('assets/earth-bump.jpg',function(b){b.wrapS=THREE.RepeatWrapping;b.offset.x=.25;m.bumpMap=b;m.bumpScale=.018;m.needsUpdate=true;});
-    loadTex('assets/earth-rough.jpg',function(r){r.wrapS=THREE.RepeatWrapping;r.offset.x=.25;m.roughnessMap=r;m.needsUpdate=true;});
+    loadTex('assets/earth-emissive.webp',function(e){e.wrapS=THREE.RepeatWrapping;e.offset.x=.25;m.emissiveMap=e;m.needsUpdate=true;});
+    loadTex('assets/earth-bump.webp',function(b){b.wrapS=THREE.RepeatWrapping;b.offset.x=.25;m.bumpMap=b;m.bumpScale=.018;m.needsUpdate=true;});
+    loadTex('assets/earth-rough.webp',function(r){r.wrapS=THREE.RepeatWrapping;r.offset.x=.25;m.roughnessMap=r;m.needsUpdate=true;});
   });
 })();
 var D2R=Math.PI/180;
@@ -625,8 +625,8 @@ var EU=[-11,17,57,35];
   var mat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.9,metalness:0,transparent:true,alphaMap:edgeFade(256,256,.07),emissive:0xffffff,emissiveIntensity:.18,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2,depthWrite:false,opacity:0});
   var mesh=new THREE.Mesh(patchGeo(R*1.0008,EU[0],EU[1],EU[2],EU[3],96,80),mat);mesh.renderOrder=1;
   earth.add(mesh);
-  loadTex('assets/europe-hd.jpg',function(t){mat.map=t;mat.emissiveMap=t;mat.opacity=1;mat.needsUpdate=true;});
-  loadTex('assets/europe-bump.jpg',function(b){mat.bumpMap=b;mat.bumpScale=.02;mat.needsUpdate=true;});
+  loadTex('assets/europe-hd.webp',function(t){mat.map=t;mat.emissiveMap=t;mat.opacity=1;mat.needsUpdate=true;});
+  loadTex('assets/europe-bump.webp',function(b){mat.bumpMap=b;mat.bumpScale=.02;mat.needsUpdate=true;});
 })();
 /* calque France : remplissage + contour, plus lumineux au survol */
 var franceMat=(function(){

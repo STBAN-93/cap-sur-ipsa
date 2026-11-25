@@ -7,7 +7,7 @@ Version de production : « npm run build » produit le dossier dist/ (« npm run
 
 Organisation du code (src/) :
   main.js              point d'entrée, initialise chaque partie dans l'ordre
-  scene/scene.js       scène 3D (Three.js r128)
+  scene/scene.js       scène 3D (Three.js r128), chargée à part après le reste de la page
   search/              moteur de recherche, explorateur, palette Ctrl+K
   fiches/drawer.js     fiche détaillée + liens directs #fiche/<id>
   data/fiches.js       base de connaissances (fiches sourcées)
@@ -18,10 +18,16 @@ Organisation du code (src/) :
 
 Logo : le site affiche automatiquement le logo officiel s'il trouve le fichier
 public/assets/logo-ipsa.svg (ou public/assets/logo-ipsa.png). Dépose le fichier fourni par le
-service communication de l'IPSA dans ce dossier, puis recharge la page.
+service communication de l'IPSA dans ce dossier. En local (npm run dev), la page se recharge
+toute seule ; pour le site en ligne, il faut faire un commit puis un push.
 
 Photos du campus : optionnelles, à déposer dans public/photos/ (photo-1.jpg à photo-18.jpg).
-La galerie n'apparaît que si elles existent.
+La galerie n'apparaît que si elles existent. Comme pour le logo, la liste des fichiers présents
+est établie au build (vite.config.js) : le site ne demande jamais de fichier absent.
+
+Textures du globe : public/assets/*.webp (converties depuis les JPEG d'origine, qualité 85).
+Polices : hébergées avec le site (paquets @fontsource), aucun appel à Google Fonts.
+Favicon : public/favicon.svg.
 
 Copilote : sur claude.ai, il rédige ses réponses avec Claude à partir des fiches.
 Hors de claude.ai, il passe en « mode fiches » et cite directement les fiches.

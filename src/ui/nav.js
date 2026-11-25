@@ -1,3 +1,4 @@
+import { logos } from 'virtual:media';
 /* ---------- navigation : barre, section courante, logo ---------- */
 export function initNav(){
 var nav=document.querySelector('nav'),links=[].slice.call(document.querySelectorAll('.links a[href^="#"]:not(.join)'));
@@ -7,7 +8,7 @@ function onS(){nav.classList.toggle('scrolled',scrollY>40);
   links.forEach(function(a){a.classList.toggle('cur',a.getAttribute('href')==='#'+cur);});}
 addEventListener('scroll',onS,{passive:true});onS();
 /* logo : affiché seulement si le fichier officiel est déposé dans assets/ */
-['assets/logo-ipsa.svg','assets/logo-ipsa.png'].reduce(function(p,src){return p.catch(function(){return new Promise(function(ok,ko){var i=new Image();i.onload=function(){ok(src);};i.onerror=ko;i.src=src;});});},Promise.reject()).then(function(src){
+logos.reduce(function(p,src){return p.catch(function(){return new Promise(function(ok,ko){var i=new Image();i.onload=function(){ok(src);};i.onerror=ko;i.src=src;});});},Promise.reject()).then(function(src){
   document.querySelectorAll('[data-logo]').forEach(function(im){im.src=src;im.classList.add('ok');});
 }).catch(function(){});
 }

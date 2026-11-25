@@ -1,3 +1,4 @@
+import { photos } from 'virtual:media';
 /* ================= Interface (indépendante de WebGL) ================= */
 export function initInterface(){
 function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
@@ -99,7 +100,7 @@ picks.forEach(function(b){
 
 /* galerie : n'apparaît que si des photos existent dans photos/ */
 var gal=document.getElementById('photos'),grid=document.getElementById('gal-grid'),lb=document.getElementById('lightbox'),lbi=document.getElementById('lightbox-img');
-for(var i=1;i<=18;i++){(function(n){
+photos.forEach(function(n){(function(n){
   var im=new Image();
   im.onload=function(){
     var f=document.createElement('figure'),g=document.createElement('img');
@@ -108,7 +109,7 @@ for(var i=1;i<=18;i++){(function(n){
     f.style.order=n;grid.appendChild(f);gal.hidden=false;
   };
   im.src='photos/photo-'+n+'.jpg';
-})(i);}
+})(n);});
 lb.addEventListener('click',function(){lb.classList.remove('open');});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
 }
