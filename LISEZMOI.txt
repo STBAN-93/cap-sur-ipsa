@@ -5,15 +5,33 @@ Lancer le site en local (Node.js requis) :
   npm run dev      puis ouvrir http://localhost:5173
 Version de production : « npm run build » produit le dossier dist/ (« npm run preview » pour la tester).
 
+Pages du site (à la racine, toutes déclarées dans vite.config.js) :
+  index.html           accueil : portes d'entrée, chiffres, globe des campus, classements
+  formations.html      cursus, majeures, programmes, admission, FAQ
+  campus.html          campus, international, associations, profils, galerie photos
+  carrieres.html       débouchés, réseau, start-up, classements et avis
+  lancement.html       animation Ariane 6 (bouton « Lancer »)
+  base.html            base de connaissances (accepte ?q=, ?cat=, ?camp=)
+Pour ajouter une page : créer le fichier .html, l'ajouter à la liste PAGES de vite.config.js,
+créer son point d'entrée dans src/pages/ et son lien dans src/partials/nav.html.
+
+Anciens liens : index.html#fiche/<id> et les anciennes ancres de la page unique (#cursus,
+#campus, #debouches…) sont redirigés vers la bonne page (petit script en tête d'index.html).
+
 Organisation du code (src/) :
-  main.js              point d'entrée, initialise chaque partie dans l'ordre
-  scene/scene.js       scène 3D (Three.js r128), chargée à part après le reste de la page
+  partials/            morceaux de HTML communs (menu, appel à l'action, pied de page,
+                       Copilote, palette, fiche) : <!-- @include nom --> dans une page
+                       est remplacé par src/partials/nom.html au build
+  pages/common.js      socle commun à toutes les pages (styles, menu, Ctrl+K, fiches, Copilote)
+  pages/<page>.js      point d'entrée de chaque page
+  scene/scene.js       scène 3D (Three.js r128), accueil seulement, chargée après le reste
+  bg/stars.js          fond étoilé léger des autres pages (canvas 2D, sans Three.js)
   search/              moteur de recherche, explorateur, palette Ctrl+K
   fiches/drawer.js     fiche détaillée + liens directs #fiche/<id>
   data/fiches.js       base de connaissances (fiches sourcées)
   copilote/            assistant Copilote
   launch/launch.js     animation de lancement Ariane 6
-  ui/                  interface, profils, navigation + logo
+  ui/                  interface, profils, menu (dont le bouton mobile) + logo
   styles/main.css      styles
 
 Logo : le site affiche automatiquement le logo officiel s'il trouve le fichier

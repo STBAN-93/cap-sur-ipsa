@@ -625,3 +625,27 @@ body[data-page="home"] .final{padding:10vh 0 8vh}
   .doors-t{margin-top:32px}
   body[data-page="home"] .hero{padding-top:13vh}
 }
+@media (max-width:600px){
+  /* accueil mobile compact : le détail complet reste sur les pages Campus et Carrières */
+  .doors{grid-template-columns:1fr 1fr}
+  .door{padding:14px 12px 10px;gap:6px}
+  .door h3{font-size:16.5px}
+  .door .dk{font-size:10px;letter-spacing:.1em}
+  .door-links{flex-direction:column;gap:4px;padding-top:6px}
+  .door-links a{min-height:32px;padding:4px 10px;font-size:11.5px}
+  body[data-page="home"] .scrollhint{display:none}
+  body[data-page="home"] .lead{margin-top:18px}
+  body[data-page="home"] .mission{margin-top:18px}
+  body[data-page="home"] .campus .addr,body[data-page="home"] .campus .desc{display:none}
+  body[data-page="home"] .campus{padding:14px 16px}
+  body[data-page="home"] .campus .name{font-size:22px}
+  body[data-page="home"] .campus .cstats{margin-top:8px;padding-top:8px}
+  body[data-page="home"] #globe .sub{margin-bottom:12px}
+  body[data-page="home"] .kpis{grid-template-columns:repeat(3,1fr);gap:8px}
+  body[data-page="home"] .kpi{padding:12px 10px}
+  body[data-page="home"] .kpi b{font-size:19px}
+  body[data-page="home"] .kpi span{font-size:11.5px}
+  body[data-page="home"] .rkc{padding:14px}
+  body[data-page="home"] .rkc .big{font-size:42px;min-width:52px}
+  body[data-page="home"] .rkc .big.sm{font-size:26px}
+}

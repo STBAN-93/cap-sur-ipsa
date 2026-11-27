@@ -30,7 +30,7 @@ var stars=[];for(var i=0;i<260;i++)stars.push([Math.random(),Math.random(),Math.
 var clouds=[];for(i=0;i<14;i++)clouds.push([Math.random(),Math.random()*1.6,.4+Math.random()*.8]);
 function resize(){D=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*D;cv.height=H*D;}
 window.addEventListener('resize',resize);resize();
-var cur=-1,T0=performance.now();
+var cur=-2,T0=performance.now(); /* -2 : le texte du compte à rebours s'affiche dès le départ */
 
 function ell(x,y,rx,ry,c){cx.beginPath();cx.ellipse(x,y,rx,ry,0,0,6.2832);cx.fillStyle=c;cx.fill();}
 function flame(len,wid,col1,col2,flick){
