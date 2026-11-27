@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- @include head -->
+<title>Base de connaissances · Cap sur l'IPSA</title>
+</head>
+<body data-page="base" class="lite">
+<canvas id="stars" aria-hidden="true"></canvas>
+<!-- @include nav -->
+
+<main id="contenu">
+  <span id="top" class="anchor"></span>
+  <section id="explorer" class="sec page-head base-sec" data-sec data-label="Base">
+    <div class="wrap">
+      <div class="panel">
+        <div class="x-head">
+          <div>
+            <p class="eyebrow">Base de connaissances</p>
+            <h1 class="x-title">Tout chercher sur l'IPSA.</h1>
+            <p class="sub">Programmes, majeures, enseignements, campus, associations, international, histoire, distinctions, admission. Chaque fiche cite ses sources.</p>
+          </div>
+          <div class="x-count" id="x-count" aria-live="polite"></div>
+        </div>
+        <label class="x-search">
+          <span class="sr-only">Rechercher dans la base</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="x-q" type="search" autocomplete="off" spellcheck="false" placeholder="Ex. propulsion, alternance Toulouse, fusée, frais, double diplôme">
+        </label>
+        <div class="x-filters" id="x-cats" role="group" aria-label="Catégories"></div>
+        <div class="x-filters" id="x-camps" role="group" aria-label="Campus"></div>
+        <div class="x-grid" id="x-grid"></div>
+        <div class="x-more"><button class="btn" id="x-more" type="button" hidden>Afficher plus de fiches</button></div>
+        <p class="x-note">Fiches compilées le <span id="x-date"></span> à partir de pages et brochures publiques de l'IPSA et de sources d'orientation (ONISEP, Campus France, L'Étudiant). Les fiches marquées « à vérifier » portent sur des chiffres ou des listes qui changent souvent. Pas d'annuaire nominatif d'élèves ni d'enseignants : seules quelques personnalités publiques sont citées, d'après Wikipédia. Les informations officielles sont sur ipsa.fr.</p>
+      </div>
+    </div>
+  </section>
+  <!-- @include cta -->
+</main>
+<!-- @include footer -->
+<!-- @include overlays -->
+<script type="module" src="/src/pages/base.js"></script>
+</body>
+</html>

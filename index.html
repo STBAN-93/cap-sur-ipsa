@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- @include head -->
 <title>Cap sur l'IPSA</title>
-<!-- pas de référencement par les moteurs de recherche pour l'instant : retirer cette ligne pour l'autoriser -->
-<meta name="robots" content="noindex, nofollow">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="theme-color" content="#070A12">
+<script>
+/* rétrocompatibilité : les anciens liens de la page unique mènent à leur nouvelle page */
+(function(){
+  var h=location.hash,m=/^#fiche\/(.+)$/.exec(h);
+  if(m){location.replace('base.html#fiche/'+m[1]);return;}
+  var P={cursus:'formations',majeures:'formations',programmes:'formations',admission:'formations',faq:'formations',
+    campus:'campus',passion:'campus',monde:'campus',photos:'campus',
+    debouches:'carrieres',reseau:'carrieres',startup:'carrieres',avis:'carrieres',
+    lancement:'lancement',explorer:'base'};
+  var id=h.slice(1);
+  if(P.hasOwnProperty(id))location.replace(P[id]+'.html#'+id);
+})();
+</script>
 </head>
-<body>
+<body data-page="home">
 <canvas id="stage" aria-hidden="true"></canvas>
 <div id="labels" aria-hidden="true"></div>
 <div class="gcard" id="gcard" aria-hidden="true"></div>
-<div class="progress" id="progress"></div>
-
-<nav>
-  <a class="skip" href="#explorer">Aller à la base de connaissances</a>
-  <a class="brand" href="#top" aria-label="Cap sur l'IPSA, retour en haut">
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><ellipse cx="16" cy="16" rx="14" ry="6" transform="rotate(-24 16 16)" stroke="#ECE7DC" stroke-width="1.6"/><circle cx="16" cy="16" r="5" fill="#FF5A1F"/><circle cx="26.5" cy="10.2" r="2" fill="#6FD6FF"/></svg>
-    Cap sur l'IPSA
-    <img class="brand-logo" data-logo alt="Logo IPSA">
-  </a>
-  <div class="links">
-    <a href="#cursus">Cursus</a>
-    <a href="#majeures">Majeures</a>
-    <a href="#campus">Campus</a>
-    <a href="#debouches">Carrières</a>
-    <a href="#admission">Admission</a>
-    <a href="#explorer">Base</a>
-    <button class="k-btn" type="button" data-open-search aria-label="Rechercher (raccourci Ctrl K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="klabel">Rechercher</span><kbd><span class="kmod">Ctrl</span> K</kbd></button>
-    <a class="join" href="#rejoindre">Rejoindre</a>
-  </div>
-</nav>
-
-<div class="rail" id="rail" role="navigation" aria-label="Sections"></div>
+<!-- @include nav -->
 
 <div class="hud" aria-hidden="true">
   <span id="hud-sec">Départ</span><br>
@@ -42,22 +29,65 @@
   <span class="bar"><i id="hud-bar"></i></span>
 </div>
 
-<main>
-  <section id="top" class="sec" data-sec data-label="Départ">
+<main id="contenu">
+  <section id="top" class="sec hero" data-sec data-label="Départ">
     <div class="wrap">
       <p class="eyebrow">École d'ingénieurs · Air · Espace · Mobilités</p>
       <h1>Construis<br>ce qui <em>vole.</em></h1>
       <p class="lead">L'IPSA forme depuis plus de 60 ans les ingénieurs de l'aéronautique et du spatial. Post-bac, sur trois campus, avec des cours d'aéro dès la première année.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="#chiffres">Découvrir l'école</a>
-        <a class="btn" href="#explorer">Chercher une info</a>
-        <a class="btn" href="#" data-open-chat>Poser une question</a>
-      </div>
       <div class="mission">
         <span><b>3</b> campus : Paris-Ivry, Toulouse, Lyon</span>
         <span>Diplôme d'ingénieur <b>CTI</b></span>
         <span>Alternance possible dès l'<b>A3</b></span>
         <span><b>10</b> majeures</span>
+      </div>
+
+      <h2 class="doors-t">Par où commencer ?</h2>
+      <div class="doors">
+        <article class="door">
+          <span class="dk">Lycéen</span>
+          <h3>Je prépare mon post-bac</h3>
+          <p>Cinq ans après le bac : deux ans de prépa intégrée avec de l'aéro dès la première année, puis dix majeures au choix.</p>
+          <ul class="door-links">
+            <li><a href="formations.html#cursus">Le cursus</a></li>
+            <li><a href="formations.html#majeures">Les majeures</a></li>
+            <li><a href="formations.html#admission">L'admission</a></li>
+          </ul>
+        </article>
+        <article class="door">
+          <span class="dk">Parent</span>
+          <h3>J'accompagne mon enfant</h3>
+          <p>Un diplôme habilité par la CTI, 100 % des diplômés en poste deux mois après la sortie, selon l'école. Les frais et les financements sont détaillés dans la base.</p>
+          <ul class="door-links">
+            <li><a href="carrieres.html#debouches">L'insertion</a></li>
+            <li><a href="base.html?q=frais">Les frais</a></li>
+            <li><a href="formations.html#faq">Questions fréquentes</a></li>
+          </ul>
+        </article>
+        <article class="door">
+          <span class="dk">Stage et alternance</span>
+          <h3>Je veux apprendre en entreprise</h3>
+          <p>Un stage chaque année, de 1 à 6 mois. L'alternance est possible dès l'A3, et les MSc et le MBA se font en alternance.</p>
+          <ul class="door-links">
+            <li><a href="formations.html#cursus">Les stages</a></li>
+            <li><a href="base.html?q=alternance">L'alternance</a></li>
+            <li><a href="formations.html#programmes">MSc et MBA</a></li>
+          </ul>
+        </article>
+        <article class="door">
+          <span class="dk">Entreprise</span>
+          <h3>Je recrute des talents</h3>
+          <p>Stagiaires, alternants, jeunes diplômés : plus de 5 500 diplômés, déjà recrutés par Safran, Thales, Airbus ou Air France.</p>
+          <ul class="door-links">
+            <li><a href="carrieres.html#reseau">Le réseau</a></li>
+            <li><a href="base.html?q=entreprise">Relations entreprises</a></li>
+            <li><a href="carrieres.html#startup">Les start-up</a></li>
+          </ul>
+        </article>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="base.html">Chercher une info</a>
+        <a class="btn" href="#" data-open-chat>Poser une question</a>
       </div>
       <p class="scrollhint">Fais défiler pour décoller</p>
     </div>
@@ -90,138 +120,11 @@
     </div>
   </section>
 
-  <section id="passion" class="sec" data-sec data-label="Passion">
+  <section id="globe" class="sec" data-sec data-label="Campus">
     <div class="bignum" aria-hidden="true">02</div>
     <div class="wrap">
-      <div class="panel t3d reveal">
-        <p class="eyebrow">02 · Une école de passionnés</p>
-        <h2>Ici, tout le monde a sa place.</h2>
-        <p class="sub">L'IPSA se présente elle-même comme « l'école des passionnés ». Pilote, ingénieur, futur contrôleur aérien, codeur, entrepreneur ou sportif de haut niveau : la passion de l'air et de l'espace est le point commun. Choisis un profil.</p>
-        <div class="prof-tabs" role="tablist" aria-label="Profils">
-          <button role="tab" aria-selected="true" data-p="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15l7-2 2-8 2 1-1 7 6 2 2 3-8-1-2 5-2-1 1-5-6 1z"/></svg>Ingénieur</button>
-          <button role="tab" aria-selected="false" data-p="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 13l20-5-3 4 3 4-20-3z"/><circle cx="7" cy="12" r="1.6"/></svg>Pilote</button>
-          <button role="tab" aria-selected="false" data-p="2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21h6M12 21V9M6 9h12l-2-5H8z"/></svg>Contrôleur aérien</button>
-          <button role="tab" aria-selected="false" data-p="3"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><rect x="9" y="9" width="6" height="6"/></svg>Drones</button>
-          <button role="tab" aria-selected="false" data-p="4"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v10H4zM8 20h8M7 10l2 2-2 2M12 14h4"/></svg>Cyber et data</button>
-          <button role="tab" aria-selected="false" data-p="5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c3 3 4 7 3 12h-6C8 9 9 5 12 2zM9 14l-3 4h3M15 14l3 4h-3M10 20h4"/></svg>Entrepreneur</button>
-          <button role="tab" aria-selected="false" data-p="6"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M8 13l-2 8 6-3 6 3-2-8"/></svg>Sport de haut niveau</button>
-        </div>
-        <div class="prof-body" id="prof-body" role="tabpanel" aria-live="polite"></div>
-        <p class="note">Sources : brochures IPSA (2024-2026), ipsa.fr, ENAC. Les conditions des concours et partenariats changent : vérifie-les sur le site de l'organisme concerné.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="cursus" class="sec" data-sec data-label="Cursus">
-    <div class="bignum" aria-hidden="true">03</div>
-    <div class="wrap">
-      <div class="panel col-right t3d">
-        <p class="eyebrow">03 · Le cursus ingénieur</p>
-        <h2>Cinq ans pour passer du sol à l'orbite.</h2>
-        <p class="sub">Deux ans de prépa intégrée, puis trois ans de cycle ingénieur. Le diplôme d'ingénieur IPSA est habilité par la Commission des Titres d'Ingénieur.</p>
-        <ol class="timeline">
-          <li>
-            <span class="badge">A1</span>
-            <div><span class="grp">Prépa intégrée</span><h3>Les fondamentaux</h3>
-            <p>Maths, physique, méthode de l'ingénieur. Et déjà des cours d'aéro dès la première année.</p>
-            <div class="chips"><span class="chip">Stage de 1 mois</span></div></div>
-          </li>
-          <li>
-            <span class="badge">A2</span>
-            <div><span class="grp">Prépa intégrée</span><h3>L'approfondissement</h3>
-            <p>Tu consolides les bases scientifiques et tu passes ton premier stage technicien.</p>
-            <div class="chips"><span class="chip">Stage technicien, 2 mois</span></div></div>
-          </li>
-          <li>
-            <span class="badge">A3</span>
-            <div><span class="grp">Cycle ingénieur</span><h3>Entrée dans le cycle ingénieur</h3>
-            <p>Tronc commun, semestre d'études à l'international et possibilité de partir en alternance.</p>
-            <div class="chips"><span class="chip">Alternance possible</span><span class="chip">Semestre à l'international</span><span class="chip">Stage facultatif, 2 mois</span></div></div>
-          </li>
-          <li>
-            <span class="badge">A4</span>
-            <div><span class="grp">Cycle ingénieur</span><h3>La majeure</h3>
-            <p>Tu choisis ta voie : propulsion, spatial, embarqué, cyber, IA, drones.</p>
-            <div class="chips"><span class="chip">Stage assistant ingénieur, 4 mois</span></div></div>
-          </li>
-          <li>
-            <span class="badge">A5</span>
-            <div><span class="grp">Cycle ingénieur</span><h3>La spécialisation métier</h3>
-            <p>Dernière ligne droite, puis ton premier poste d'ingénieur.</p>
-            <div class="chips"><span class="chip">Stage de fin d'études, 6 mois</span></div></div>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section id="majeures" class="sec" data-sec data-label="Majeures">
-    <div class="bignum" aria-hidden="true">04</div>
-    <div class="wrap">
-      <p class="eyebrow">04 · Les majeures</p>
-      <h2>Choisis ta trajectoire.</h2>
-      <p class="sub">10 majeures de spécialisation au total, selon le campus. Dis-nous ce qui te fait vibrer, on allume les majeures qui collent.</p>
-      <div class="picker" id="picker" role="group" aria-label="Ce qui te passionne">
-        <button type="button" data-k="moteurs" aria-pressed="false">Les moteurs et lanceurs</button>
-        <button type="button" data-k="satellites" aria-pressed="false">Les satellites</button>
-        <button type="button" data-k="drones" aria-pressed="false">Les drones</button>
-        <button type="button" data-k="data" aria-pressed="false">Les données et l'IA</button>
-        <button type="button" data-k="cyber" aria-pressed="false">La cybersécurité</button>
-        <button type="button" data-k="avions" aria-pressed="false">Les avions</button>
-        <button type="button" data-k="electronique" aria-pressed="false">L'électronique</button>
-      </div>
-      <p class="pick-out" id="pick-out" aria-live="polite"></p>
-      <div class="grid4" id="majors">
-        <article class="card t3d" data-tags="moteurs lanceurs"><span class="ix">M01</span><h3>Propulsion aérospatiale</h3><p>Moteurs, combustion, lanceurs. Là où la poussée se calcule.</p><ul><li>Thermodynamique et combustion</li><li>Moteurs d'avions et de fusées</li></ul></article>
-        <article class="card t3d" data-tags="drones avions"><span class="ix">M02</span><h3>Systèmes aéronautiques autonomes</h3><p>Drones, pilotage automatique, aéronefs qui décident seuls.</p><ul><li>Guidage et navigation</li><li>Drones et autonomie</li></ul></article>
-        <article class="card t3d" data-tags="satellites moteurs"><span class="ix">M03</span><h3>Systèmes spatiaux</h3><p>Satellites, lanceurs et missions en orbite.</p><ul><li>Mécanique orbitale</li><li>Architecture de missions</li></ul></article>
-        <article class="card t3d" data-tags="electronique satellites"><span class="ix">M04</span><h3>Systèmes embarqués et télécoms</h3><p>Électronique, logiciel temps réel et liaisons radio.</p><ul><li>Électronique embarquée</li><li>Liaisons et protocoles</li></ul></article>
-        <article class="card t3d" data-tags="data cyber"><span class="ix">M05</span><h3>Cybersécurité, data et IA</h3><p>Protéger et exploiter les données de l'air et de l'espace.</p><ul><li>Sécurité des systèmes</li><li>Apprentissage automatique</li></ul></article>
-        <article class="card t3d" data-tags="avions"><span class="ix">M06</span><h3>Cellules aéronautiques</h3><p>Structures, aérodynamique, conception de l'avion.</p><ul><li>Aérodynamique</li><li>Structures et matériaux</li></ul></article>
-        <article class="card t3d" data-tags="data satellites"><span class="ix">M07</span><h3>Space Data</h3><p>Exploiter les données issues des satellites et des missions spatiales.</p><ul><li>Données d'observation</li><li>Traitement à grande échelle</li></ul><span class="tag">Toulouse</span></article>
-        <article class="card t3d" data-tags=""><span class="ix">M08</span><h3>Et d'autres encore</h3><p>L'offre varie selon le campus et évolue chaque année. La liste à jour est sur ipsa.fr.</p><span class="tag">10 majeures au total</span></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="lancement" class="launch" data-sec data-label="Lancement" aria-label="Animation : les phases de vol d'un lancement Ariane 6">
-    <div class="l-sticky">
-      <canvas id="lcv" aria-hidden="true"></canvas>
-      <div class="l-hud">
-        <p class="eyebrow">05 · Anatomie d'un lancement</p>
-        <h2 class="l-title">Du pas de tir à l'orbite.</h2>
-        <p class="l-sub">Fais défiler : le vol inaugural d'Ariane 6 (VA262, 9 juillet 2024) phase par phase. On étudie ces systèmes à l'IPSA, dans la majeure Espace, lanceurs et satellites.</p>
-        <div class="l-clock"><span>T</span><b id="l-t">-00:10</b></div>
-        <div class="l-phase"><span id="l-k">Chronologie finale</span><h3 id="l-n">Compte à rebours</h3><p id="l-d"></p></div>
-      </div>
-      <ol class="l-steps" id="l-steps"></ol>
-      <div class="l-bar"><i id="l-bar"></i></div>
-      <p class="l-src">Horaires : CNES et ESA, vol VA262. Max Q : ordre de grandeur générique, non publié pour ce vol. Animation schématique, pas à l'échelle.</p>
-    </div>
-  </section>
-
-  <section id="programmes" class="sec" data-sec data-label="Programmes">
-    <div class="bignum" aria-hidden="true">06</div>
-    <div class="wrap">
-      <p class="eyebrow">06 · Les autres voies</p>
-      <h2>Bachelor, MSc, MBA : d'autres rampes de lancement.</h2>
-      <p class="sub">Au-delà du cycle ingénieur, l'école annonce 6 programmes d'expertise : 1 Bachelor, 4 MSc et 1 MBA.</p>
-      <div class="grid3">
-        <article class="card t3d"><span class="ix">BACHELOR</span><h3>Bachelor Aéronautique</h3><p>3 ans, titre RNCP de niveau 6, deux spécialisations : drones ou intelligence artificielle.</p><ul><li>Alternance possible en 3e année</li><li>Paris-Ivry, Toulouse, Lyon</li></ul></article>
-        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Aéro, IA et cybersécurité</h3><p>2 ans en alternance : 1 semaine à l'école, 3 semaines en entreprise.</p><span class="tag">Paris-Ivry</span></article>
-        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Space Data</h3><p>2 ans d'alternance pour travailler les données du spatial.</p><span class="tag">Toulouse</span></article>
-        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Aerospace Propulsion</h3><p>Un programme en anglais autour de la propulsion aérospatiale.</p><span class="tag">Paris</span></article>
-        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Autonomous Aerospace Systems</h3><p>Systèmes aérospatiaux autonomes, en alternance.</p></article>
-        <article class="card t3d"><span class="ix">MBA</span><h3>MBA Ingénieur d'affaires aéronautique et spatial</h3><p>2 ans en alternance, titre RNCP de niveau 7, pour lier technique et business.</p><span class="tag">Paris</span></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="campus" class="sec" data-sec data-label="Campus">
-    <div class="bignum" aria-hidden="true">07</div>
-    <div class="wrap">
       <div class="col-left">
-        <p class="eyebrow">07 · Les campus</p>
+        <p class="eyebrow">02 · Les campus</p>
         <h2>Trois bases, un seul cap.</h2>
         <p class="sub">Clique sur un campus pour zoomer dessus, clique à nouveau pour revenir à la vue d'ensemble. Survole la France ou un campus sur le globe pour voir ses chiffres.</p>
         <p class="ghint"><i></i>Globe interactif · données Parcoursup 2025</p>
@@ -245,268 +148,36 @@
             <span class="cstats"><span><b>50</b> places post-bac</span><span><b>56,3 %</b> taux d'accès</span><span><b>2 717</b> candidats</span></span>
           </button>
         </div>
+        <p class="more-link"><a class="btn" href="campus.html">Campus et vie étudiante</a></p>
       </div>
     </div>
   </section>
 
-  <section id="debouches" class="sec" data-sec data-label="Débouchés">
-    <div class="bignum" aria-hidden="true">08</div>
-    <div class="wrap">
-      <div class="panel col-left t3d reveal">
-        <p class="eyebrow">08 · Après l'école</p>
-        <h2>Où atterrissent les diplômés.</h2>
-        <p class="sub">Promo 2024 : 406 ingénieurs diplômés. Les chiffres viennent de l'enquête d'insertion publiée par l'école.</p>
-        <div class="kpis">
-          <div class="kpi"><b data-count="44000" data-suffix=" €">44 000 €</b><span>salaire médian brut annuel, sans primes, en France</span></div>
-          <div class="kpi"><b data-count="100" data-suffix=" %">100 %</b><span>en poste 2 mois après la sortie des études</span></div>
-          <div class="kpi"><b data-count="96.3" data-dec="1" data-suffix=" %">96,3 %</b><span>en CDI, tous cadres ou assimilés</span></div>
-          <div class="kpi"><b data-count="50" data-suffix=" %">50 %</b><span>embauchés à la suite de leur stage</span></div>
-          <div class="kpi"><b data-count="20" data-suffix=" %">20 %</b><span>avec un double diplôme</span></div>
-          <div class="kpi"><b data-count="23" data-suffix=" %">23 %</b><span>de femmes dans la promotion</span></div>
-        </div>
-        <p class="subh">Secteurs d'emploi, promo 2023</p>
-        <ul class="bars compact">
-          <li><div class="row"><span>Aéronautique et transport aérien</span><b>49 %</b></div><div class="track"><i style="--w:49%"></i></div></li>
-          <li><div class="row"><span>Spatial</span><b>16 %</b></div><div class="track"><i style="--w:16%"></i></div></li>
-          <li><div class="row"><span>Défense</span><b>10 %</b></div><div class="track"><i style="--w:10%"></i></div></li>
-          <li><div class="row"><span>Ingénierie et services aux entreprises</span><b>8 %</b></div><div class="track"><i style="--w:8%"></i></div></li>
-          <li><div class="row"><span>Informatique</span><b>4 %</b></div><div class="track"><i style="--w:4%"></i></div></li>
-          <li><div class="row"><span>Automobile, ferroviaire, naval</span><b>4 %</b></div><div class="track"><i style="--w:4%"></i></div></li>
-          <li><div class="row"><span>Énergie</span><b>3 %</b></div><div class="track"><i style="--w:3%"></i></div></li>
-          <li><div class="row"><span>Électronique et télécoms</span><b>1 %</b></div><div class="track"><i style="--w:1%"></i></div></li>
-        </ul>
-        <p class="note">Sources : brochure institutionnelle IPSA 2026 (enquête promo 2024) et page insertion d'ipsa.fr (promo 2023). Chiffres déclarés par l'école.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="reseau" class="sec" data-sec data-label="Réseau">
-    <div class="bignum" aria-hidden="true">09</div>
+  <section id="classements" class="sec" data-sec data-label="Classements">
+    <div class="bignum" aria-hidden="true">03</div>
     <div class="wrap">
       <div class="panel col-right t3d reveal">
-        <p class="eyebrow">09 · Le réseau</p>
-        <h2>Plus de 5 500 diplômés en vol.</h2>
-        <p class="sub">Les premiers recruteurs, les régions où travaillent les diplômés et quelques parcours connus du grand public. Sur le globe, les avions relient Paris à des universités partenaires de l'école.</p>
-        <p class="subh">Premiers recruteurs, promo 2023</p>
-        <div class="recr">
-          <div><b>10 %</b><span>Safran</span></div>
-          <div><b>7 %</b><span>Thales</span></div>
-          <div><b>6 %</b><span>Airbus</span></div>
-          <div><b>5 %</b><span>Air France</span></div>
-        </div>
-        <p class="subh">Lieu de travail</p>
-        <div class="geo" role="img" aria-label="Île-de-France 60 %, Occitanie 30 %, Provence-Alpes-Côte d'Azur 6 %, étranger 8 %">
-          <span style="--f:60">Île-de-France 60 %</span><span style="--f:30">Occitanie 30 %</span><span style="--f:6">PACA</span><span style="--f:8">Étr.</span>
-        </div>
-        <div class="ticker" aria-label="Entreprises ayant recruté des diplômés"><div>
-          <span>Safran</span><span>Thales</span><span>Airbus</span><span>Air France</span><span>ArianeGroup</span><span>Armée de l'Air et de l'Espace</span><span>ATR Aircraft</span><span>Aéroports de Paris</span><span>Aéroports de la Côte d'Azur</span><span>Air Caraïbes</span><span>Alstom</span><span>Alten</span><span>Accenture</span><span>Akka Technologies</span><span>Amazon</span><span>ArcelorMittal</span><span>Avions Mauboussin</span>
-          <span>Safran</span><span>Thales</span><span>Airbus</span><span>Air France</span><span>ArianeGroup</span><span>Armée de l'Air et de l'Espace</span><span>ATR Aircraft</span><span>Aéroports de Paris</span><span>Aéroports de la Côte d'Azur</span><span>Air Caraïbes</span><span>Alstom</span><span>Alten</span><span>Accenture</span><span>Akka Technologies</span><span>Amazon</span><span>ArcelorMittal</span><span>Avions Mauboussin</span>
-        </div></div>
-        <p class="subh">Ils sont passés par l'IPSA</p>
-        <div class="people">
-          <a class="person" href="https://fr.wikipedia.org/wiki/%C3%89ric_Boullier" target="_blank" rel="noopener noreferrer"><span class="pk">Formule 1 · promo 1999</span><b>Éric Boullier</b><span>Directeur de l'écurie Lotus F1 de 2010 à 2013, puis directeur de la compétition de McLaren de 2014 à 2018. Il a ensuite dirigé le Grand Prix de France.</span><em>Wikipédia ↗</em></a>
-          <a class="person" href="https://fr.wikipedia.org/wiki/Julien_Simon-Chautemps" target="_blank" rel="noopener noreferrer"><span class="pk">Formule 1 · promo 2002</span><b>Julien Simon-Chautemps</b><span>Ingénieur de course en F1 de 2007 à 2022, notamment de Kimi Räikkönen. Fondateur de JSC7 Engineering, consultant pour Canal+ et F1 TV.</span><em>Wikipédia ↗</em></a>
-          <a class="person" href="https://fr.wikipedia.org/wiki/Cyril_Bourlon_de_Rouvre" target="_blank" rel="noopener noreferrer"><span class="pk">Industrie · promo 1965</span><b>Cyril Bourlon de Rouvre</b><span>Homme d'affaires et homme politique, propriétaire de l'écurie de F1 Ligier, maire de Chaumont de 1989 à 1995.</span><em>Wikipédia ↗</em></a>
-          <a class="person" href="https://fr.wikipedia.org/wiki/Laura_Tremble" target="_blank" rel="noopener noreferrer"><span class="pk">Sport de haut niveau · promo 2025</span><b>Charlotte et Laura Tremble</b><span>Jumelles, nageuses artistiques françaises. Wikipédia les rattache à la promotion IPSA 2025.</span><em>Wikipédia ↗</em></a>
-        </div>
-        <p class="note">Sources : page insertion d'ipsa.fr (promo 2023) et Wikipédia (articles IPSA et biographies). Promotions indiquées d'après ces pages.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="startup" class="sec" data-sec data-label="Start-up">
-    <div class="bignum" aria-hidden="true">10</div>
-    <div class="wrap">
-      <div class="panel col-right t3d reveal">
-        <p class="eyebrow">10 · Entrepreneuriat</p>
-        <h2>Lancer sa propre start-up.</h2>
-        <p class="sub">Tous les talents ne finissent pas chez un grand groupe. L'école accompagne aussi ceux qui veulent créer leur entreprise, de l'idée au lancement.</p>
-        <div class="ipst">
-          <div class="ip-step"><span class="n">01</span><b>Boarding</b><span>L'idée prend forme : sensibilisation, ateliers, campagnes « Pitch your idea! » deux fois par an.</span></div>
-          <div class="ip-step"><span class="n">02</span><b>Booster</b><span>Coaching individuel et d'équipe, prototype, ateliers propriété intellectuelle, levée de fonds et aides.</span></div>
-          <div class="ip-step"><span class="n">03</span><b>Orbit</b><span>Lancement de la start-up, puis suivi après la création et réseau IPSTARTUP Club.</span></div>
-        </div>
-        <div class="st-grid">
-          <div class="st-card"><b>Statut étudiant-entrepreneur</b><span>Emploi du temps aménagé, crédits ECTS, et le projet peut compter comme stage. Accès à un réseau de plus de 8 000 étudiants-entrepreneurs.</span></div>
-          <div class="st-card"><b>Incubateurs partenaires</b><span>Incuballiance, ESA BIC et Suricub, plus les PÉPITE PEIPS Paris-Saclay et Ecrin Toulouse. Le groupe IONIS a aussi son incubateur, IONIS 361.</span></div>
-          <div class="st-card"><b>Pour démarrer</b><span>Le module optionnel « Ta StartUP en 20h! », des hackathons, des challenges et des conférences.</span></div>
-        </div>
-        <p class="subh">Des start-up nées à l'IPSA</p>
-        <div class="st-logos"><span><b>Opus Aerospace</b>lanceurs de microsatellites</span><span><b>Sirius Space Services</b>spatial</span><span><b>Andromach</b>start-up étudiante</span></div>
-        <p class="note">Sources : page entrepreneuriat d'ipsa.fr (programme IPSTARTUP) et communiqués du groupe IONIS sur IONIS 361.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="avis" class="sec" data-sec data-label="Avis">
-    <div class="bignum" aria-hidden="true">11</div>
-    <div class="wrap">
-      <div class="panel col-left t3d reveal">
-        <p class="eyebrow">11 · Classements et avis</p>
-        <h2>Ce qu'en disent les palmarès et les étudiants.</h2>
+        <p class="eyebrow">03 · Classements et insertion</p>
+        <h2>Reconnue par les palmarès, attendue par les recruteurs.</h2>
         <div class="rk">
           <div class="rkc"><div class="big">3<sup>e</sup></div><p><b>École d'ingénieurs en aéronautique et aérospatial</b>Classement L'Étudiant 2026, spécialité aéronautique et aérospatial (publié en février 2026).</p></div>
           <div class="rkc"><div class="big sm">Top&nbsp;3</div><p><b>Insertion professionnelle, post-bac aéro</b>Classement L'Étudiant de février 2025, selon la brochure 2026 de l'école.</p></div>
         </div>
-        <p class="subh">Avis étudiants publiés</p>
-        <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#FF5A1F"/><stop offset="1" stop-color="#FFB37F"/></linearGradient></defs></svg>
-        <div class="gauges">
-          <div class="gauge"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42" data-v="4.6"/><text x="50" y="58" text-anchor="middle">4,6</text></svg><b>L'Étudiant, Ivry</b><span>23 avis certifiés, note sur 5</span></div>
-          <div class="gauge"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42" data-v="4.27"/><text x="50" y="58" text-anchor="middle">4,3</text></svg><b>Diplomeo, Paris</b><span>11 avis, note sur 5</span></div>
-          <div class="gauge"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42" data-v="4.5"/><text x="50" y="58" text-anchor="middle">4,5</text></svg><b>Diplomeo, Toulouse</b><span>2 avis seulement, note sur 5</span></div>
+        <div class="kpis">
+          <div class="kpi"><b data-count="44000" data-suffix=" €">44 000 €</b><span>salaire médian brut annuel, sans primes, en France</span></div>
+          <div class="kpi"><b data-count="100" data-suffix=" %">100 %</b><span>en poste 2 mois après la sortie des études</span></div>
+          <div class="kpi"><b data-count="96.3" data-dec="1" data-suffix=" %">96,3 %</b><span>en CDI, tous cadres ou assimilés</span></div>
         </div>
-        <div class="subs" aria-label="Détail des avis Diplomeo pour Paris">
-          <div><b>4,2</b><span>Cours</span></div><div><b>4,5</b><span>Ambiance</span></div><div><b>3,9</b><span>Locaux</span></div><div><b>4,4</b><span>Intégration pro</span></div>
-        </div>
-        <p class="subh">Admission post-bac, Parcoursup 2025 (bac général, section francophone)</p>
-        <table class="ptab">
-          <thead><tr><th>Campus</th><th>Candidats</th><th>Places</th><th>Taux d'accès</th></tr></thead>
-          <tbody>
-            <tr><td>Paris-Ivry</td><td>3 439</td><td>220</td><td><span class="acc"><i style="--w:72.7%"></i>72,7 %</span></td></tr>
-            <tr><td>Toulouse</td><td>2 815</td><td>130</td><td><span class="acc"><i style="--w:53.2%"></i>53,2 %</span></td></tr>
-            <tr><td>Lyon</td><td>2 717</td><td>50</td><td><span class="acc"><i style="--w:56.3%"></i>56,3 %</span></td></tr>
-          </tbody>
-        </table>
-        <p class="note">Taux d'accès calculé ici : candidats en position de recevoir une proposition sur candidats ayant confirmé le vœu, en phase principale au 10 juillet 2025 (rapport public Parcoursup publié par l'école). Les avis en ligne sont peu nombreux et parfois anciens : ils donnent une tendance, pas une mesure. Sources : L'Étudiant, Diplomeo, IPSA.</p>
+        <p class="note">Sources : classement L'Étudiant 2026 (février 2026), brochure institutionnelle IPSA 2026 (enquête d'insertion, promo 2024 : 406 ingénieurs diplômés). Chiffres déclarés par l'école.</p>
+        <p class="more-link"><a class="btn" href="carrieres.html">Débouchés, réseau et avis</a></p>
       </div>
     </div>
   </section>
 
-  <section id="admission" class="sec" data-sec data-label="Admission">
-    <div class="bignum" aria-hidden="true">12</div>
-    <div class="wrap">
-      <div class="panel col-right t3d">
-        <p class="eyebrow">12 · Intégrer l'IPSA</p>
-        <h2>Comment monter à bord.</h2>
-        <p class="sub">Les modalités changent d'une année à l'autre. Vérifie toujours le calendrier sur le site officiel.</p>
-        <ol class="steps">
-          <li><div><b>Cycle ingénieur, 1re année</b><span>Ouvert aux élèves de terminale générale avec spécialités scientifiques, de terminale STI2D, et aux étudiants de bac+1 et bac+2 scientifiques.</span></div></li>
-          <li><div><b>Admissions parallèles</b><span>Entrée possible en cours de cursus avec un bac+3 ou un bac+4, selon les places disponibles.</span></div></li>
-          <li><div><b>Bachelor, MSc, MBA</b><span>Candidature sur ipsa.fr : épreuves écrites et orales, puis étude de dossier.</span></div></li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section id="monde" class="sec" data-sec data-label="Monde">
-    <div class="bignum" aria-hidden="true">13</div>
-    <div class="wrap">
-      <div class="panel col-left t3d">
-        <p class="eyebrow">13 · Au-delà du cursus</p>
-        <h2>Le monde est ton terrain de jeu.</h2>
-        <p class="sub">Partir, s'engager, construire des projets. L'école ne s'arrête pas à la salle de cours.</p>
-        <ul class="facts">
-          <li><b>120+</b><span>universités partenaires dans le monde</span></li>
-          <li><b>70+</b><span>doubles diplômes possibles</span></li>
-          <li><b>1 semestre</b><span>d'études à l'international en cycle ingénieur</span></li>
-          <li><b>90+</b><span>associations étudiantes sur les 3 campus</span></li>
-          <li><b>IPSAIR</b><span>le festival de l'air et de l'espace</span></li>
-          <li><b>Parcours anglophone</b><span>à Paris-Ivry, sur les trois premières années du cycle ingénieur</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="explorer" class="sec">
-    <div class="wrap">
-      <div class="panel">
-        <div class="x-head">
-          <div>
-            <p class="eyebrow">Base de connaissances</p>
-            <h2>Tout chercher sur l'IPSA.</h2>
-            <p class="sub">Programmes, majeures, enseignements, campus, associations, international, histoire, distinctions, admission. Chaque fiche cite ses sources.</p>
-          </div>
-          <div class="x-count" id="x-count" aria-live="polite"></div>
-        </div>
-        <label class="x-search">
-          <span class="sr-only">Rechercher dans la base</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input id="x-q" type="search" autocomplete="off" spellcheck="false" placeholder="Ex. propulsion, alternance Toulouse, fusée, frais, double diplôme">
-        </label>
-        <div class="x-filters" id="x-cats" role="group" aria-label="Catégories"></div>
-        <div class="x-filters" id="x-camps" role="group" aria-label="Campus"></div>
-        <div class="x-grid" id="x-grid"></div>
-        <div class="x-more"><button class="btn" id="x-more" type="button" hidden>Afficher plus de fiches</button></div>
-        <p class="x-note">Fiches compilées le <span id="x-date"></span> à partir de pages et brochures publiques de l'IPSA et de sources d'orientation (ONISEP, Campus France, L'Étudiant). Les fiches marquées « à vérifier » portent sur des chiffres ou des listes qui changent souvent. Pas d'annuaire nominatif d'élèves ni d'enseignants : seules quelques personnalités publiques sont citées, d'après Wikipédia. Les informations officielles sont sur ipsa.fr.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="photos" class="sec" hidden>
-    <div class="wrap">
-      <p class="eyebrow">Galerie</p>
-      <h2>Le campus en images.</h2>
-      <div class="gal-grid" id="gal-grid"></div>
-      <p class="note">Photos : droits réservés à leurs auteurs et à l'IPSA.</p>
-    </div>
-  </section>
-
-  <section id="faq" class="sec" data-sec data-label="FAQ">
-    <div class="bignum" aria-hidden="true">14</div>
-    <div class="wrap">
-      <div class="panel t3d">
-        <p class="eyebrow">14 · Questions fréquentes</p>
-        <h2>Avant le décollage.</h2>
-        <div class="faq">
-          <details><summary>L'IPSA est-elle une école d'ingénieurs post-bac ?</summary><p>Oui. Le cursus dure 5 ans : 2 ans de prépa intégrée puis 3 ans de cycle ingénieur. Le diplôme d'ingénieur est habilité par la CTI.</p></details>
-          <details><summary>Peut-on étudier en alternance ?</summary><p>Oui, à partir de la 3e année du cycle ingénieur, avec la possibilité de l'apprentissage. Les MSc et le MBA se font aussi en alternance. Le rythme dépend du programme.</p></details>
-          <details><summary>Peut-on étudier en anglais ?</summary><p>Oui. Un parcours anglophone existe à Paris-Ivry pour les trois premières années du cursus ingénieur.</p></details>
-          <details><summary>Combien de stages dans le cursus ingénieur ?</summary><p>1 mois facultatif en A1, 2 mois obligatoires en A2, 2 mois facultatifs en A3, 4 mois en A4 et 6 mois en A5.</p></details>
-          <details><summary>Où sont les campus ?</summary><p>À Paris-Ivry, Toulouse et Lyon. La première année a ouvert à Lyon en septembre 2025. Les majeures proposées varient selon le campus.</p></details>
-          <details><summary>Où trouver les informations officielles ?</summary><p>Sur ipsa.fr : programmes détaillés, calendrier de candidature, journées portes ouvertes et financements.</p></details>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="rejoindre" class="sec final" data-sec data-label="Orbite">
-    <div class="wrap">
-      <p class="eyebrow">15 · Décollage</p>
-      <h2>Prêt à monter à bord ?</h2>
-      <p class="lead">Les candidatures, les journées portes ouvertes et les programmes détaillés sont sur le site officiel de l'IPSA.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="https://www.ipsa.fr" target="_blank" rel="noopener">Aller sur ipsa.fr</a>
-        <a class="btn" href="#top">Retour au départ</a>
-      </div>
-      <footer>
-        <img class="foot-logo" data-logo alt="Logo IPSA">
-        Projet étudiant non officiel, sans lien commercial avec l'école. IPSA est la marque de l'Institut Polytechnique des Sciences Avancées.<br>
-        Sources : brochures IPSA 2026-2027 et ipsa.fr, L'Étudiant, ONISEP, CIDJ, L'Express Éducation.<br>
-        Globe : frontières Natural Earth, relief NOAA ETOPO1 et Natural Earth (domaine public), textures 8K générées pour ce site. Assistant : réponses générées à partir des fiches du site, à vérifier sur ipsa.fr.
-      </footer>
-    </div>
-  </section>
+  <!-- @include cta -->
 </main>
-
-
-<button class="cp-fab" id="cp-fab" type="button" aria-expanded="false" aria-controls="cp"><span class="dot" aria-hidden="true"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-linecap="round"/></svg><span class="lbl">Une question ?</span></button>
-<section class="cp" id="cp" role="dialog" aria-modal="false" aria-labelledby="cp-t">
-  <div class="cp-head"><div class="cp-av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#070A12" stroke-width="2" stroke-linejoin="round"><path d="M12 2c3 3 4 7 3 12H9C8 9 9 5 12 2z"/><path d="M9 14l-3 4h3M15 14l3 4h-3M10.5 20h3"/></svg></div><div><b id="cp-t">Copilote</b><small>Assistant non officiel du site, appuyé sur les fiches sourcées</small></div><button class="cp-x" id="cp-x" type="button" aria-label="Fermer le Copilote"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-  <div class="cp-log" id="cp-log" aria-live="polite"></div>
-  <div class="cp-sug" id="cp-sug"><button type="button">Combien coûte l'école ?</button><button type="button">Quelles majeures à Toulouse ?</button><button type="button">Comment devenir pilote ?</button><button type="button">Quel salaire en sortie ?</button><button type="button">C'est sélectif ?</button></div>
-  <p class="cp-mode" id="cp-mode"></p>
-  <form class="cp-form" id="cp-form"><label class="sr-only" for="cp-in">Ta question</label><input id="cp-in" type="text" autocomplete="off" placeholder="Pose ta question sur l'IPSA" maxlength="400"><button class="stop" id="cp-stop" type="button" hidden aria-label="Arrêter la réponse"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button><button class="send" type="submit" aria-label="Envoyer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 12l16-8-6 16-2-6z"/></svg></button></form>
-</section>
-<div class="lightbox" id="lightbox" role="dialog" aria-label="Photo agrandie"><img id="lightbox-img" alt=""></div>
-
-
-<div class="pal" id="pal" role="dialog" aria-modal="true" aria-label="Recherche rapide">
-  <div class="pal-box">
-    <div class="pal-top">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input class="pal-in" id="pal-in" type="text" autocomplete="off" spellcheck="false" placeholder="Rechercher une fiche ou une section" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list">
-    </div>
-    <ul class="pal-list" id="pal-list" role="listbox" aria-label="Résultats"></ul>
-    <div class="pal-foot"><span><span class="kbd">↑</span> <span class="kbd">↓</span> naviguer</span><span><span class="kbd">Entrée</span> ouvrir</span><span><span class="kbd">Échap</span> fermer</span><span><span class="kbd">/</span> ouvrir depuis la page</span></div>
-  </div>
-</div>
-<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title">
-  <div class="dr-box">
-    <div class="dr-bar"><span class="x-count">Fiche</span><button class="dr-close" id="dr-close" type="button">Fermer <span class="kbd">Échap</span></button></div>
-    <div id="dr-body"></div>
-  </div>
-</div>
-<script type="module" src="/src/main.js"></script>
+<!-- @include footer -->
+<!-- @include overlays -->
+<script type="module" src="/src/pages/home.js"></script>
 </body>
 </html>

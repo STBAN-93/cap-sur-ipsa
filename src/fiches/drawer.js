@@ -44,9 +44,12 @@ dr.addEventListener("click",function(e){
   if(e.target===dr){closeFiche();return;}
   var r=e.target.closest("[data-id]");if(r){openFiche(r.getAttribute("data-id"));return;}
   var g=e.target.closest("[data-globe]");
-  if(g){var i=+g.getAttribute("data-globe");closeFiche();var b=document.querySelector('.campus[data-i="'+i+'"]');
+  if(g){var i=+g.getAttribute("data-globe"),globe=document.getElementById("globe");
+    /* le globe interactif n'existe que sur l'accueil : depuis une autre page, on s'y rend */
+    if(!globe){location.href="index.html#globe/"+i;return;}
+    closeFiche();var b=document.querySelector('.campus[data-i="'+i+'"]');
     if(b&&b.getAttribute("aria-pressed")!=="true")b.click();
-    document.getElementById("campus").scrollIntoView({behavior:"smooth",block:"start"});}
+    globe.scrollIntoView({behavior:"smooth",block:"start"});}
 });
 
 /* lien direct #fiche/<id> */

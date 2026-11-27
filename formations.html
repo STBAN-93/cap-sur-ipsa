@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- @include head -->
+<title>Formations · Cap sur l'IPSA</title>
+</head>
+<body data-page="formations" class="lite">
+<canvas id="stars" aria-hidden="true"></canvas>
+<!-- @include nav -->
+
+<main id="contenu">
+  <header id="top" class="sec page-head" data-sec data-label="Formations">
+    <div class="wrap">
+      <p class="eyebrow">Formations</p>
+      <h1>Du bac à l'orbite : les parcours de l'IPSA.</h1>
+      <p class="lead">Le cycle ingénieur en cinq ans, dix majeures de spécialisation, un Bachelor, quatre MSc et un MBA. Et comment y entrer.</p>
+      <ul class="toc" aria-label="Sur cette page">
+        <li><a href="#cursus">Cursus</a></li>
+        <li><a href="#majeures">Majeures</a></li>
+        <li><a href="#programmes">Programmes</a></li>
+        <li><a href="#admission">Admission</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section id="cursus" class="sec" data-sec data-label="Cursus">
+    <div class="bignum" aria-hidden="true">01</div>
+    <div class="wrap">
+      <div class="panel col-right t3d">
+        <p class="eyebrow">01 · Le cursus ingénieur</p>
+        <h2>Cinq ans pour passer du sol à l'orbite.</h2>
+        <p class="sub">Deux ans de prépa intégrée, puis trois ans de cycle ingénieur. Le diplôme d'ingénieur IPSA est habilité par la Commission des Titres d'Ingénieur.</p>
+        <ol class="timeline">
+          <li>
+            <span class="badge">A1</span>
+            <div><span class="grp">Prépa intégrée</span><h3>Les fondamentaux</h3>
+            <p>Maths, physique, méthode de l'ingénieur. Et déjà des cours d'aéro dès la première année.</p>
+            <div class="chips"><span class="chip">Stage de 1 mois</span></div></div>
+          </li>
+          <li>
+            <span class="badge">A2</span>
+            <div><span class="grp">Prépa intégrée</span><h3>L'approfondissement</h3>
+            <p>Tu consolides les bases scientifiques et tu passes ton premier stage technicien.</p>
+            <div class="chips"><span class="chip">Stage technicien, 2 mois</span></div></div>
+          </li>
+          <li>
+            <span class="badge">A3</span>
+            <div><span class="grp">Cycle ingénieur</span><h3>Entrée dans le cycle ingénieur</h3>
+            <p>Tronc commun, semestre d'études à l'international et possibilité de partir en alternance.</p>
+            <div class="chips"><span class="chip">Alternance possible</span><span class="chip">Semestre à l'international</span><span class="chip">Stage facultatif, 2 mois</span></div></div>
+          </li>
+          <li>
+            <span class="badge">A4</span>
+            <div><span class="grp">Cycle ingénieur</span><h3>La majeure</h3>
+            <p>Tu choisis ta voie : propulsion, spatial, embarqué, cyber, IA, drones.</p>
+            <div class="chips"><span class="chip">Stage assistant ingénieur, 4 mois</span></div></div>
+          </li>
+          <li>
+            <span class="badge">A5</span>
+            <div><span class="grp">Cycle ingénieur</span><h3>La spécialisation métier</h3>
+            <p>Dernière ligne droite, puis ton premier poste d'ingénieur.</p>
+            <div class="chips"><span class="chip">Stage de fin d'études, 6 mois</span></div></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="majeures" class="sec" data-sec data-label="Majeures">
+    <div class="bignum" aria-hidden="true">02</div>
+    <div class="wrap">
+      <p class="eyebrow">02 · Les majeures</p>
+      <h2>Choisis ta trajectoire.</h2>
+      <p class="sub">10 majeures de spécialisation au total, selon le campus. Dis-nous ce qui te fait vibrer, on allume les majeures qui collent.</p>
+      <div class="picker" id="picker" role="group" aria-label="Ce qui te passionne">
+        <button type="button" data-k="moteurs" aria-pressed="false">Les moteurs et lanceurs</button>
+        <button type="button" data-k="satellites" aria-pressed="false">Les satellites</button>
+        <button type="button" data-k="drones" aria-pressed="false">Les drones</button>
+        <button type="button" data-k="data" aria-pressed="false">Les données et l'IA</button>
+        <button type="button" data-k="cyber" aria-pressed="false">La cybersécurité</button>
+        <button type="button" data-k="avions" aria-pressed="false">Les avions</button>
+        <button type="button" data-k="electronique" aria-pressed="false">L'électronique</button>
+      </div>
+      <p class="pick-out" id="pick-out" aria-live="polite"></p>
+      <div class="grid4" id="majors">
+        <article class="card t3d" data-tags="moteurs lanceurs"><span class="ix">M01</span><h3>Propulsion aérospatiale</h3><p>Moteurs, combustion, lanceurs. Là où la poussée se calcule.</p><ul><li>Thermodynamique et combustion</li><li>Moteurs d'avions et de fusées</li></ul></article>
+        <article class="card t3d" data-tags="drones avions"><span class="ix">M02</span><h3>Systèmes aéronautiques autonomes</h3><p>Drones, pilotage automatique, aéronefs qui décident seuls.</p><ul><li>Guidage et navigation</li><li>Drones et autonomie</li></ul></article>
+        <article class="card t3d" data-tags="satellites moteurs"><span class="ix">M03</span><h3>Systèmes spatiaux</h3><p>Satellites, lanceurs et missions en orbite.</p><ul><li>Mécanique orbitale</li><li>Architecture de missions</li></ul><a class="tag tag-link" href="lancement.html">Voir un lancement Ariane 6</a></article>
+        <article class="card t3d" data-tags="electronique satellites"><span class="ix">M04</span><h3>Systèmes embarqués et télécoms</h3><p>Électronique, logiciel temps réel et liaisons radio.</p><ul><li>Électronique embarquée</li><li>Liaisons et protocoles</li></ul></article>
+        <article class="card t3d" data-tags="data cyber"><span class="ix">M05</span><h3>Cybersécurité, data et IA</h3><p>Protéger et exploiter les données de l'air et de l'espace.</p><ul><li>Sécurité des systèmes</li><li>Apprentissage automatique</li></ul></article>
+        <article class="card t3d" data-tags="avions"><span class="ix">M06</span><h3>Cellules aéronautiques</h3><p>Structures, aérodynamique, conception de l'avion.</p><ul><li>Aérodynamique</li><li>Structures et matériaux</li></ul></article>
+        <article class="card t3d" data-tags="data satellites"><span class="ix">M07</span><h3>Space Data</h3><p>Exploiter les données issues des satellites et des missions spatiales.</p><ul><li>Données d'observation</li><li>Traitement à grande échelle</li></ul><span class="tag">Toulouse</span></article>
+        <article class="card t3d" data-tags=""><span class="ix">M08</span><h3>Et d'autres encore</h3><p>L'offre varie selon le campus et évolue chaque année. La liste à jour est sur ipsa.fr.</p><span class="tag">10 majeures au total</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="programmes" class="sec" data-sec data-label="Programmes">
+    <div class="bignum" aria-hidden="true">03</div>
+    <div class="wrap">
+      <p class="eyebrow">03 · Les autres voies</p>
+      <h2>Bachelor, MSc, MBA : d'autres rampes de lancement.</h2>
+      <p class="sub">Au-delà du cycle ingénieur, l'école annonce 6 programmes d'expertise : 1 Bachelor, 4 MSc et 1 MBA.</p>
+      <div class="grid3">
+        <article class="card t3d"><span class="ix">BACHELOR</span><h3>Bachelor Aéronautique</h3><p>3 ans, titre RNCP de niveau 6, deux spécialisations : drones ou intelligence artificielle.</p><ul><li>Alternance possible en 3e année</li><li>Paris-Ivry, Toulouse, Lyon</li></ul></article>
+        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Aéro, IA et cybersécurité</h3><p>2 ans en alternance : 1 semaine à l'école, 3 semaines en entreprise.</p><span class="tag">Paris-Ivry</span></article>
+        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Space Data</h3><p>2 ans d'alternance pour travailler les données du spatial.</p><span class="tag">Toulouse</span></article>
+        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Aerospace Propulsion</h3><p>Un programme en anglais autour de la propulsion aérospatiale.</p><span class="tag">Paris</span></article>
+        <article class="card t3d"><span class="ix">MSC</span><h3>MSc Autonomous Aerospace Systems</h3><p>Systèmes aérospatiaux autonomes, en alternance.</p></article>
+        <article class="card t3d"><span class="ix">MBA</span><h3>MBA Ingénieur d'affaires aéronautique et spatial</h3><p>2 ans en alternance, titre RNCP de niveau 7, pour lier technique et business.</p><span class="tag">Paris</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="admission" class="sec" data-sec data-label="Admission">
+    <div class="bignum" aria-hidden="true">04</div>
+    <div class="wrap">
+      <div class="panel col-right t3d reveal">
+        <p class="eyebrow">04 · Intégrer l'IPSA</p>
+        <h2>Comment monter à bord.</h2>
+        <p class="sub">Les modalités changent d'une année à l'autre. Vérifie toujours le calendrier sur le site officiel.</p>
+        <ol class="steps">
+          <li><div><b>Cycle ingénieur, 1re année</b><span>Ouvert aux élèves de terminale générale avec spécialités scientifiques, de terminale STI2D, et aux étudiants de bac+1 et bac+2 scientifiques.</span></div></li>
+          <li><div><b>Admissions parallèles</b><span>Entrée possible en cours de cursus avec un bac+3 ou un bac+4, selon les places disponibles.</span></div></li>
+          <li><div><b>Bachelor, MSc, MBA</b><span>Candidature sur ipsa.fr : épreuves écrites et orales, puis étude de dossier.</span></div></li>
+        </ol>
+        <p class="subh">Admission post-bac, Parcoursup 2025 (bac général, section francophone)</p>
+        <div class="tab-scroll">
+        <table class="ptab">
+          <thead><tr><th>Campus</th><th>Candidats</th><th>Places</th><th>Taux d'accès</th></tr></thead>
+          <tbody>
+            <tr><td>Paris-Ivry</td><td>3 439</td><td>220</td><td><span class="acc"><i style="--w:72.7%"></i>72,7 %</span></td></tr>
+            <tr><td>Toulouse</td><td>2 815</td><td>130</td><td><span class="acc"><i style="--w:53.2%"></i>53,2 %</span></td></tr>
+            <tr><td>Lyon</td><td>2 717</td><td>50</td><td><span class="acc"><i style="--w:56.3%"></i>56,3 %</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="note">Taux d'accès calculé ici : candidats en position de recevoir une proposition sur candidats ayant confirmé le vœu, en phase principale au 10 juillet 2025 (rapport public Parcoursup publié par l'école). Source : IPSA, rapport public Parcoursup 2025.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="sec" data-sec data-label="FAQ">
+    <div class="bignum" aria-hidden="true">05</div>
+    <div class="wrap">
+      <div class="panel t3d">
+        <p class="eyebrow">05 · Questions fréquentes</p>
+        <h2>Avant le décollage.</h2>
+        <div class="faq">
+          <details><summary>L'IPSA est-elle une école d'ingénieurs post-bac ?</summary><p>Oui. Le cursus dure 5 ans : 2 ans de prépa intégrée puis 3 ans de cycle ingénieur. Le diplôme d'ingénieur est habilité par la CTI.</p></details>
+          <details><summary>Peut-on étudier en alternance ?</summary><p>Oui, à partir de la 3e année du cycle ingénieur, avec la possibilité de l'apprentissage. Les MSc et le MBA se font aussi en alternance. Le rythme dépend du programme.</p></details>
+          <details><summary>Peut-on étudier en anglais ?</summary><p>Oui. Un parcours anglophone existe à Paris-Ivry pour les trois premières années du cursus ingénieur.</p></details>
+          <details><summary>Combien de stages dans le cursus ingénieur ?</summary><p>1 mois facultatif en A1, 2 mois obligatoires en A2, 2 mois facultatifs en A3, 4 mois en A4 et 6 mois en A5.</p></details>
+          <details><summary>Où sont les campus ?</summary><p>À Paris-Ivry, Toulouse et Lyon. La première année a ouvert à Lyon en septembre 2025. Les majeures proposées varient selon le campus.</p></details>
+          <details><summary>Où trouver les informations officielles ?</summary><p>Sur ipsa.fr : programmes détaillés, calendrier de candidature, journées portes ouvertes et financements.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="next">
+    <div class="wrap">
+      <a class="next-card" href="carrieres.html"><span>Continuer vers</span><b>Carrières</b><em>Où mènent ces formations</em></a>
+      <a class="next-card" href="campus.html"><span>Continuer vers</span><b>Campus et vie étudiante</b><em>Trois bases, 90+ associations</em></a>
+    </div>
+  </div>
+  <!-- @include cta -->
+</main>
+<!-- @include footer -->
+<!-- @include overlays -->
+<script type="module" src="/src/pages/formations.js"></script>
+</body>
+</html>

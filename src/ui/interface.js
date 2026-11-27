@@ -7,15 +7,16 @@ var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce
 /* rail + progress */
 var secs=[].slice.call(document.querySelectorAll('[data-sec]'));
 var rail=document.getElementById('rail');
-secs.forEach(function(s){
+if(rail)secs.forEach(function(s){
   var a=document.createElement('a');a.href='#'+s.id;a.setAttribute('data-l',s.getAttribute('data-label'));a.setAttribute('aria-label',s.getAttribute('data-label'));
   rail.appendChild(a);
 });
-var dots=[].slice.call(rail.children);
+var dots=rail?[].slice.call(rail.children):[];
+if(rail&&secs.length<3)rail.style.display='none'; /* un rail d'un ou deux points n'aide pas */
 var progress=document.getElementById('progress');
 function onScroll(){
   var y=window.scrollY||0,max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
-  progress.style.width=(clamp(y/max,0,1)*100)+'%';
+  if(progress)progress.style.width=(clamp(y/max,0,1)*100)+'%';
   var mid=y+window.innerHeight*.5,cur=0;
   secs.forEach(function(s,i){if(mid>=s.getBoundingClientRect().top+y)cur=i;});
   dots.forEach(function(d,i){d.classList.toggle('on',i===cur);});
@@ -98,8 +99,9 @@ picks.forEach(function(b){
   });
 });
 
-/* galerie : n'apparaît que si des photos existent dans photos/ */
+/* galerie (page Campus) : n'apparaît que si des photos existent dans photos/ */
 var gal=document.getElementById('photos'),grid=document.getElementById('gal-grid'),lb=document.getElementById('lightbox'),lbi=document.getElementById('lightbox-img');
+if(gal&&grid&&lb&&lbi){
 photos.forEach(function(n){(function(n){
   var im=new Image();
   im.onload=function(){
@@ -107,9 +109,11 @@ photos.forEach(function(n){(function(n){
     g.src=im.src;g.alt='Photo du campus '+n;g.loading='lazy';f.appendChild(g);
     f.addEventListener('click',function(){lbi.src=g.src;lb.classList.add('open');});
     f.style.order=n;grid.appendChild(f);gal.hidden=false;
+    var toc=document.querySelector('.toc-photos');if(toc)toc.hidden=false;
   };
   im.src='photos/photo-'+n+'.jpg';
 })(n);});
 lb.addEventListener('click',function(){lb.classList.remove('open');});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
+}
 }

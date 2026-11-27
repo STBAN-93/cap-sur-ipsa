@@ -6,12 +6,24 @@ import { openFiche } from '../fiches/drawer.js';
 var CAMPS=["Paris-Ivry","Toulouse","Lyon"];
 var showAll=null;
 /* « Tout voir » depuis la palette : affiche tous les résultats d'une requête dans l'explorateur */
-export function showAllResults(v){if(showAll)showAll(v);}
+/* renvoie false hors de la page Base : l'appelant ouvre alors base.html?q=… */
+export function showAllResults(v){if(!showAll)return false;showAll(v);return true;}
 
 export function initExplorer(){
-var st={q:"",cat:"",camp:"",n:12};
+/* adresses directes : base.html?q=alternance, ?cat=asso, ?camp=Toulouse */
+var P=new URLSearchParams(location.search);
+var st={q:P.get("q")||"",cat:P.get("cat")||"",camp:P.get("camp")||"",n:12};
 var q=$("x-q"),grid=$("x-grid"),more=$("x-more"),cnt=$("x-count"),cats=$("x-cats"),camps=$("x-camps");
 $("x-date").textContent=D.date;
+if(st.cat&&!D.cats.some(function(k){return k[0]===st.cat;}))st.cat="";
+if(st.camp&&CAMPS.indexOf(st.camp)<0)st.camp="";
+q.value=st.q;
+/* l'adresse suit la recherche et les filtres : on peut la partager */
+function syncURL(){
+  var u=new URLSearchParams();if(st.q)u.set("q",st.q);if(st.cat)u.set("cat",st.cat);if(st.camp)u.set("camp",st.camp);
+  var qs=u.toString();
+  try{history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);}catch(e){}
+}
 function chips(){
   var c={};F.forEach(function(f){c[f.cat]=(c[f.cat]||0)+1;});
   cats.innerHTML='<span class="x-label">Catégorie</span><button class="chip" type="button" data-c="" aria-pressed="true">Tout<i>'+F.length+'</i></button>'+
@@ -33,6 +45,7 @@ function render(){
   grid.innerHTML=L.length?L.slice(0,st.n).map(function(f){return card(f,r.ws);}).join(""):
     '<div class="x-empty"><b>Aucune fiche pour « '+esc(st.q)+' ».</b><br>Essaie un mot plus général (propulsion, campus, stage) ou retire un filtre. Pour une question précise, ipsa.fr reste la référence.</div>';
   more.hidden=L.length<=st.n;
+  syncURL();
   clearTimeout(reflowT);reflowT=setTimeout(function(){window.dispatchEvent(new Event("resize"));},60);
 }
 chips();

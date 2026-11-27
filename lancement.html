@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- @include head -->
+<title>Lancement Ariane 6 · Cap sur l'IPSA</title>
+</head>
+<body data-page="lancement" class="lite">
+<canvas id="stars" aria-hidden="true"></canvas>
+<!-- @include nav -->
+
+<main id="contenu">
+  <span id="top" class="anchor"></span>
+  <section id="lancement" class="launch" data-sec data-label="Lancement" aria-labelledby="l-title">
+    <div class="l-stage">
+      <canvas id="lcv" role="img" aria-label="Animation schématique du lancement d'Ariane 6"></canvas>
+      <div class="l-hud">
+        <p class="eyebrow">Anatomie d'un lancement</p>
+        <h1 class="l-title" id="l-title">Du pas de tir à l'orbite.</h1>
+        <p class="l-sub">Le vol inaugural d'Ariane 6 (VA262, 9 juillet 2024), phase par phase. On étudie ces systèmes à l'IPSA, dans la majeure Espace, lanceurs et satellites.</p>
+        <div class="l-clock"><span>T</span><b id="l-t">-00:10</b></div>
+        <div class="l-phase" aria-live="polite"><span id="l-k">Chronologie finale</span><h2 id="l-n">Compte à rebours</h2><p id="l-d"></p></div>
+      </div>
+      <div class="l-bar"><i id="l-bar"></i></div>
+    </div>
+
+    <div class="l-ctrl" role="group" aria-label="Commandes de l'animation">
+      <button class="btn primary l-go" id="l-go" type="button">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path class="i-play" d="M8 5v14l11-7z"/><path class="i-pause" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+        <span id="l-go-t">Lancer</span>
+      </button>
+      <button class="btn l-ic" id="l-prev" type="button" aria-label="Phase précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="btn l-ic" id="l-next" type="button" aria-label="Phase suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="btn l-ic" id="l-replay" type="button" aria-label="Rejouer depuis le début"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg></button>
+      <p class="l-keys" id="l-keys">Clavier : <span class="kbd">Espace</span> lancer ou mettre en pause, <span class="kbd">←</span> <span class="kbd">→</span> changer de phase</p>
+    </div>
+
+    <details class="l-list" id="l-list">
+      <summary>Les 10 phases du vol</summary>
+      <ol class="l-steps" id="l-steps"></ol>
+    </details>
+  </section>
+
+  <div class="wrap l-after">
+    <p class="l-src">Horaires : CNES et ESA, vol VA262. Max Q : ordre de grandeur générique, non publié pour ce vol. Animation schématique, pas à l'échelle. La durée réelle (près d'une heure jusqu'au déploiement des satellites) est ici condensée en 40 secondes.</p>
+  </div>
+
+  <div class="next">
+    <div class="wrap">
+      <a class="next-card" href="formations.html#majeures"><span>Continuer vers</span><b>La majeure Systèmes spatiaux</b><em>Satellites, lanceurs et missions en orbite</em></a>
+      <a class="next-card" href="campus.html"><span>Continuer vers</span><b>Campus et vie étudiante</b><em>Fusées expérimentales en association</em></a>
+    </div>
+  </div>
+  <!-- @include cta -->
+</main>
+<!-- @include footer -->
+<!-- @include overlays -->
+<script type="module" src="/src/pages/lancement.js"></script>
+</body>
+</html>

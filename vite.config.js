@@ -38,13 +38,44 @@ function mediaManifest() {
   };
 }
 
+/* Gabarits partagés : dans chaque page HTML, <!-- @include nom --> est remplacé par
+   src/partials/nom.html (menu, pied de page, palette, Copilote…). Écrits une seule fois,
+   présents dans le HTML final de chaque page (pas d'attente du JavaScript). */
+function partials() {
+  const dir = fileURLToPath(new URL('./src/partials', import.meta.url));
+  return {
+    name: 'html-partials',
+    transformIndexHtml: {
+      order: 'pre',
+      handler: (html) => html.replace(/<!--\s*@include\s+([\w-]+)\s*-->/g, (_, name) =>
+        fs.readFileSync(path.join(dir, name + '.html'), 'utf8')),
+    },
+    configureServer(server) {
+      // en dev : modifier un gabarit recharge la page
+      server.watcher.add(dir);
+      server.watcher.on('change', (file) => {
+        if (path.dirname(file) === dir) server.ws.send({ type: 'full-reload' });
+      });
+    },
+  };
+}
+
+/* toutes les pages du site : chacune est construite et publiée dans dist/ */
+const root = fileURLToPath(new URL('.', import.meta.url));
+const PAGES = ['index', 'formations', 'campus', 'carrieres', 'lancement', 'base'];
+
 export default defineConfig({
   // chemins relatifs : le dossier dist/ fonctionne aussi dans un sous-dossier (GitHub Pages)
   base: './',
-  // site d'une seule page, mais sans repli « SPA » : un fichier absent doit renvoyer 404
+  // site multi-pages, sans repli « SPA » : un fichier absent doit renvoyer 404
   appType: 'mpa',
-  plugins: [mediaManifest()],
+  plugins: [mediaManifest(), partials()],
   server: { port: 5173, open: false },
-  // Three.js r128 (~600 ko) n'est pas découpable : on relève le seuil d'alerte
-  build: { chunkSizeWarningLimit: 900 },
+  build: {
+    // Three.js r128 (~600 ko, accueil seulement) n'est pas découpable : on relève le seuil d'alerte
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      input: Object.fromEntries(PAGES.map((p) => [p, path.join(root, p + '.html')])),
+    },
+  },
 });

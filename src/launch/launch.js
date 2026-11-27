@@ -1,4 +1,6 @@
-/* ---------- Animation : lancement Ariane 6, phases de vol (pilotée par le scroll) ---------- */
+/* ---------- Animation : lancement Ariane 6, phases de vol ----------
+   Déclenchée par le bouton « Lancer » : le vol (près d'une heure) est condensé en DUR secondes.
+   Pause, rejouer, phases cliquables, clavier (Espace, flèches). Sans animation si l'utilisateur l'a demandé. */
 export function initLaunch(){
 var sec=document.getElementById('lancement'),cv=document.getElementById('lcv');if(!sec||!cv)return;
 var cx=cv.getContext('2d'),W=1,H=1,D=1;
@@ -22,14 +24,13 @@ function mix(a,b,f){return a+(b-a)*f;}
 function mixC(c1,c2,f){return 'rgb('+Math.round(mix(c1[0],c2[0],f))+','+Math.round(mix(c1[1],c2[1],f))+','+Math.round(mix(c1[2],c2[2],f))+')';}
 function fmtT(t){var s=t<0?'−':'+',a=Math.abs(Math.round(t)),h=Math.floor(a/3600),m=Math.floor(a%3600/60),ss=a%60;return s+(h?h+':':'')+(m<10?'0':'')+m+':'+(ss<10?'0':'')+ss;}
 var steps=document.getElementById('l-steps');
-steps.innerHTML=EV.map(function(e){return '<li><b>'+fmtT(e.t)+'</b><span>'+e.n+'</span></li>';}).join('');
+steps.innerHTML=EV.map(function(e,k){return '<li><button type="button" data-ev="'+k+'"><b>'+fmtT(e.t)+'</b><span>'+e.n+'</span></button></li>';}).join('');
 var lis=[].slice.call(steps.children),elT=document.getElementById('l-t'),elK=document.getElementById('l-k'),elN=document.getElementById('l-n'),elD=document.getElementById('l-d'),elB=document.getElementById('l-bar');
 var stars=[];for(var i=0;i<260;i++)stars.push([Math.random(),Math.random(),Math.random()*1.4+.3,Math.random()]);
 var clouds=[];for(i=0;i<14;i++)clouds.push([Math.random(),Math.random()*1.6,.4+Math.random()*.8]);
 function resize(){D=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*D;cv.height=H*D;}
 window.addEventListener('resize',resize);resize();
-var cur=-1,visible=false,T0=performance.now();
-new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible)loop();},{threshold:0}).observe(sec);
+var cur=-1,T0=performance.now();
 
 function ell(x,y,rx,ry,c){cx.beginPath();cx.ellipse(x,y,rx,ry,0,0,6.2832);cx.fillStyle=c;cx.fill();}
 function flame(len,wid,col1,col2,flick){
@@ -153,17 +154,67 @@ function draw(p,now){
   if(idx!==cur){cur=idx;
     if(idx<0){elK.textContent='Chronologie finale';elN.textContent='Compte à rebours';elD.textContent="Séquence automatique : les ergols sont à bord, le lanceur est sous contrôle de l'ordinateur.";}
     else{elK.textContent=EV[idx].k;elN.textContent=EV[idx].n;elD.textContent=EV[idx].d;}
-    lis.forEach(function(li,k){li.className=k<idx?'done':(k===idx?'now':'');});
+    lis.forEach(function(li,k){li.className=k<idx?'done':(k===idx?'now':'');var b=li.firstChild;if(k===idx)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
   }
 }
-var raf=0;
-function loop(){
-  if(raf)return;
-  (function f(now){
-    if(!visible){raf=0;return;}
-    var r=sec.getBoundingClientRect(),p=cl(-r.top/Math.max(1,r.height-window.innerHeight),0,1);
-    draw(p,now);raf=requestAnimationFrame(f);
-  })(performance.now());
+/* ---------- lecture ---------- */
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var DUR=40,P=0,playing=false,raf=0,last=0;
+var go=document.getElementById('l-go'),goT=document.getElementById('l-go-t'),prev=document.getElementById('l-prev'),next=document.getElementById('l-next'),replay=document.getElementById('l-replay');
+/* position (0..1) du début de chaque phase : AN[k+1] correspond à EV[k] */
+var PEV=EV.map(function(e,k){return AN[k+1][0];});
+function phaseAt(p){var k=-1;for(var i=0;i<PEV.length;i++)if(p>=PEV[i]-1e-6)k=i;return k;}
+function ui(){
+  var label=playing?'Pause':(P>=1?'Rejouer':(P>0?'Reprendre':'Lancer'));
+  if(reduce&&!playing)label=P>0?(P>=1?'Revoir le compte à rebours':'Phase suivante'):'Lancer';
+  goT.textContent=label;
+  go.classList.toggle('is-playing',playing);
+  go.setAttribute('aria-pressed',String(playing));
+  sec.classList.toggle('flying',P>0);
+  prev.disabled=P<=0;next.disabled=P>=PEV[PEV.length-1];
 }
-draw(0,performance.now());
+function frame(now){
+  var dt=Math.min(.25,(now-last)/1000);last=now; /* plafond : pas de saut après un gel */
+  P=Math.min(1,P+dt/DUR);
+  draw(P,now);
+  if(P>=1){playing=false;raf=0;ui();return;}
+  raf=requestAnimationFrame(frame);
+}
+function play(){
+  if(reduce){stepTo(phaseAt(P)+1);return;}  /* pas d'animation continue : phase par phase */
+  if(P>=1)P=0;
+  playing=true;ui();last=performance.now();
+  if(!raf)raf=requestAnimationFrame(frame);
+}
+function pause(){playing=false;if(raf){cancelAnimationFrame(raf);raf=0;}ui();}
+function seek(p){P=Math.max(0,Math.min(1,p));draw(P,performance.now());ui();}
+function stepTo(k){
+  if(k>=PEV.length){if(reduce){pause();seek(0);}return;}
+  if(k<0){seek(0);return;}
+  seek(PEV[k]);
+}
+go.addEventListener('click',function(){playing?pause():play();});
+replay.addEventListener('click',function(){pause();seek(0);if(!reduce)play();});
+prev.addEventListener('click',function(){var k=phaseAt(P);pause();stepTo(P>PEV[Math.max(k,0)]+.004?k:k-1);});
+next.addEventListener('click',function(){pause();stepTo(phaseAt(P)+1);});
+steps.addEventListener('click',function(e){var b=e.target.closest('[data-ev]');if(!b)return;pause();stepTo(+b.getAttribute('data-ev'));});
+/* clavier : Espace lance ou met en pause, flèches gauche et droite changent de phase */
+document.addEventListener('keydown',function(e){
+  if(e.ctrlKey||e.metaKey||e.altKey||document.body.classList.contains('locked'))return;
+  var t=e.target,tag=(t.tagName||'').toLowerCase();
+  if(tag==='input'||tag==='textarea'||t.isContentEditable||t.closest('.cp,#nav'))return;
+  if(e.key===' '||e.key==='Spacebar'){if(tag==='button'||tag==='a'||tag==='summary')return;e.preventDefault();go.click();}
+  else if(e.key==='ArrowRight'){e.preventDefault();next.click();}
+  else if(e.key==='ArrowLeft'){e.preventDefault();prev.click();}
+});
+/* onglet caché : on met en pause */
+document.addEventListener('visibilitychange',function(){if(document.hidden&&playing)pause();});
+window.addEventListener('resize',function(){if(!playing)draw(P,performance.now());});
+
+/* liste des phases : dépliée sur ordinateur, repliée sous l'animation sur mobile */
+var list=document.getElementById('l-list'),mq=window.matchMedia('(max-width: 860px)');
+function layout(){list.open=!mq.matches;}
+layout();(mq.addEventListener?mq.addEventListener('change',layout):0);
+
+draw(0,performance.now());ui();
 }

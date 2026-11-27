@@ -1,0 +1,24 @@
+<button class="cp-fab" id="cp-fab" type="button" aria-expanded="false" aria-controls="cp"><span class="dot" aria-hidden="true"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-linecap="round"/></svg><span class="lbl">Une question ?</span></button>
+<section class="cp" id="cp" role="dialog" aria-modal="false" aria-labelledby="cp-t">
+  <div class="cp-head"><div class="cp-av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#070A12" stroke-width="2" stroke-linejoin="round"><path d="M12 2c3 3 4 7 3 12H9C8 9 9 5 12 2z"/><path d="M9 14l-3 4h3M15 14l3 4h-3M10.5 20h3"/></svg></div><div><b id="cp-t">Copilote</b><small>Assistant non officiel du site, appuyé sur les fiches sourcées</small></div><button class="cp-x" id="cp-x" type="button" aria-label="Fermer le Copilote"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="cp-log" id="cp-log" aria-live="polite"></div>
+  <div class="cp-sug" id="cp-sug"><button type="button">Combien coûte l'école ?</button><button type="button">Quelles majeures à Toulouse ?</button><button type="button">Comment devenir pilote ?</button><button type="button">Quel salaire en sortie ?</button><button type="button">C'est sélectif ?</button></div>
+  <p class="cp-mode" id="cp-mode"></p>
+  <form class="cp-form" id="cp-form"><label class="sr-only" for="cp-in">Ta question</label><input id="cp-in" type="text" autocomplete="off" placeholder="Pose ta question sur l'IPSA" maxlength="400"><button class="stop" id="cp-stop" type="button" hidden aria-label="Arrêter la réponse"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button><button class="send" type="submit" aria-label="Envoyer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 12l16-8-6 16-2-6z"/></svg></button></form>
+</section>
+<div class="pal" id="pal" role="dialog" aria-modal="true" aria-label="Recherche rapide">
+  <div class="pal-box">
+    <div class="pal-top">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input class="pal-in" id="pal-in" type="text" autocomplete="off" spellcheck="false" placeholder="Rechercher une fiche ou une section" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list">
+    </div>
+    <ul class="pal-list" id="pal-list" role="listbox" aria-label="Résultats"></ul>
+    <div class="pal-foot"><span><span class="kbd">↑</span> <span class="kbd">↓</span> naviguer</span><span><span class="kbd">Entrée</span> ouvrir</span><span><span class="kbd">Échap</span> fermer</span><span><span class="kbd">/</span> ouvrir depuis la page</span></div>
+  </div>
+</div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title">
+  <div class="dr-box">
+    <div class="dr-bar"><span class="x-count">Fiche</span><button class="dr-close" id="dr-close" type="button">Fermer <span class="kbd">Échap</span></button></div>
+    <div id="dr-body"></div>
+  </div>
+</div>

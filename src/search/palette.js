@@ -7,14 +7,22 @@ import { showAllResults } from './explorer.js';
 export function initPalette(){
 var dr=$("drawer");
 var pal=$("pal"),pin=$("pal-in"),plist=$("pal-list"),sel=0,items=[];
-var JUMPS=[["top","Départ"],["chiffres","Chiffres clés"],["cursus","Cursus"],["majeures","Majeures"],["programmes","Programmes"],["campus","Campus"],["debouches","Débouchés"],["admission","Admission"],["monde","International et vie étudiante"],["explorer","Base de connaissances"],["faq","FAQ"]];
+/* sections du site : [page, ancre, libellé]. Depuis une autre page, on y va directement. */
+var JUMPS=[["index","top","Accueil"],["index","chiffres","Chiffres clés"],["index","globe","Globe des campus"],["index","classements","Classements et insertion"],
+  ["formations","cursus","Cursus"],["formations","majeures","Majeures"],["formations","programmes","Programmes : Bachelor, MSc, MBA"],["formations","admission","Admission et Parcoursup"],["formations","faq","FAQ"],
+  ["campus","campus","Campus"],["campus","monde","International"],["campus","associations","Associations"],["campus","passion","Profils de passionnés"],
+  ["carrieres","debouches","Débouchés"],["carrieres","reseau","Réseau et recruteurs"],["carrieres","startup","Start-up"],["carrieres","avis","Classements et avis"],
+  ["lancement","lancement","Lancement Ariane 6"],["base","explorer","Base de connaissances"]];
+var PAGE={home:"index"}[document.body.getAttribute("data-page")]||document.body.getAttribute("data-page");
 function palRender(){
   var v=pin.value,r=search(v,"",""),L=r.list.slice(0,v?8:6),h="";items=[];
   if(L.length){h+='<li class="grp" role="presentation">'+(v?'Fiches':'Fiches à la une')+'</li>';
     L.forEach(function(f){items.push({t:"f",id:f.id});h+='<li role="option" id="po'+(items.length-1)+'" data-k="'+(items.length-1)+'"><span class="pc">'+esc(CAT[f.cat])+'</span><span class="pt"><b>'+hl(f.t,r.ws)+'</b><span>'+esc(f.x.slice(0,110))+'</span></span></li>';});}
-  var nv=norm(v),J=JUMPS.filter(function(j){return !nv||norm(j[1]).indexOf(nv)>=0||j[0].indexOf(nv)>=0;}).slice(0,v?3:4);
+  var nv=norm(v),J=JUMPS.filter(function(j){if(nv)return norm(j[2]).indexOf(nv)>=0||j[1].indexOf(nv)>=0;
+    /* sans saisie : la première section de chacune des autres pages */
+    return j[0]!==PAGE&&JUMPS.findIndex(function(k){return k[0]===j[0];})===JUMPS.indexOf(j);}).slice(0,v?3:5);
   if(J.length){h+='<li class="grp" role="presentation">Aller à la section</li>';
-    J.forEach(function(j){items.push({t:"j",id:j[0]});h+='<li role="option" id="po'+(items.length-1)+'" data-k="'+(items.length-1)+'"><span class="pc">Section</span><span class="pt"><b>'+esc(j[1])+'</b></span></li>';});}
+    J.forEach(function(j){items.push({t:"j",pg:j[0],id:j[1]});h+='<li role="option" id="po'+(items.length-1)+'" data-k="'+(items.length-1)+'"><span class="pc">'+(j[0]===PAGE?'Sur la page':'Section')+'</span><span class="pt"><b>'+esc(j[2])+'</b></span></li>';});}
   if(v&&r.list.length>8){items.push({t:"all"});h+='<li role="option" id="po'+(items.length-1)+'" data-k="'+(items.length-1)+'"><span class="pc">Tout voir</span><span class="pt"><b>Les '+r.list.length+' résultats dans la base</b></span></li>';}
   if(!items.length)h='<li class="grp" role="presentation">Aucun résultat. Essaie un mot plus général.</li>';
   plist.innerHTML=h;sel=0;palSel();
@@ -26,8 +34,8 @@ function palSel(){
 function palGo(k){
   var it=items[k];if(!it)return;var v=pin.value;closePal(true);
   if(it.t==="f")openFiche(it.id);
-  else if(it.t==="j")document.getElementById(it.id).scrollIntoView({behavior:"smooth",block:"start"});
-  else showAllResults(v);
+  else if(it.t==="j"){var el=it.pg===PAGE&&document.getElementById(it.id);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});else location.href=it.pg+".html#"+it.id;}
+  else if(!showAllResults(v))location.href="base.html?q="+encodeURIComponent(v);
 }
 var palFrom=null;
 function openPal(){if(pal.classList.contains("open"))return;palFrom=document.activeElement;closeFiche();pal.classList.add("open");document.body.classList.add("locked");pin.value="";palRender();pin.focus();}

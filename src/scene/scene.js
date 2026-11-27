@@ -781,24 +781,15 @@ function measure(){
   tops=secs.map(function(s){return s.getBoundingClientRect().top+y;});
   heights=secs.map(function(s){return s.offsetHeight;});
 }
-var keys=[
-  {p:V(0,40.5,19),t:V(0,40,0),ox:.22},      /* départ */
-  {p:V(-5,9,19),t:V(0,1.5,0),ox:.2},        /* chiffres */
-  {p:V(4,5,24),t:V(0,1,0),ox:0},            /* passion */
-  {p:V(12,2,15),t:V(0,0,0),ox:-.2},         /* cursus */
-  {p:V(-8,-4,15),t:V(0,0,0),ox:0},          /* majeures */
-  {p:V(-8,-4,15),t:V(0,0,0),ox:0},          /* lancement (canvas opaque) */
-  {p:V(5,-9,14),t:V(0,-1,0),ox:0},          /* programmes */
-  {p:V(0,0,10),t:V(0,0,0),ox:.2},           /* campus (dynamique) */
-  {p:V(-12,6,12),t:V(0,0,0),ox:.2},         /* débouchés */
-  {p:ll2v(36,-22,R+8.5),t:ll2v(36,-4,R*.25),ox:-.22},  /* réseau : avions */
-  {p:V(-9,-6,12),t:V(0,0,0),ox:-.2},        /* start-up */
-  {p:ll2v(30,22,R+8.6),t:ll2v(40,4,R*.25),ox:.2},  /* avis */
-  {p:V(10,-4,13),t:V(0,0,0),ox:-.2},        /* admission */
-  {p:V(-6,10,13),t:V(0,0,0),ox:.2},         /* monde */
-  {p:V(0,7,24),t:V(0,0,0),ox:0},            /* faq */
-  {p:V(0,3,30),t:V(0,8,0),ox:0}             /* orbite */
-];
+/* positions de caméra, par identifiant de section (accueil) */
+var KEYS={
+  top:{p:V(0,40.5,19),t:V(0,40,0),ox:.22},                          /* départ */
+  chiffres:{p:V(-5,9,19),t:V(0,1.5,0),ox:.2},                       /* chiffres */
+  globe:{p:V(0,0,10),t:V(0,0,0),ox:.2},                             /* campus (dynamique) */
+  classements:{p:ll2v(30,22,R+8.6),t:ll2v(40,4,R*.25),ox:-.2},      /* classements : avions */
+  rejoindre:{p:V(0,3,30),t:V(0,8,0),ox:0}                           /* orbite */
+};
+var keys=secs.map(function(s){return KEYS[s.id]||{p:V(0,7,24),t:V(0,0,0),ox:0};});
 var campusSel=-1;
 var campusPos=V(0,0,10),campusTar=V(0,0,0);
 function campusGoal(){
@@ -807,7 +798,7 @@ function campusGoal(){
   return {p:ll2v(c.lat-5.5,c.lon,R+.85),t:ll2v(c.lat+.3,c.lon,R)};
 }
 var g0=campusGoal();campusPos.copy(g0.p);campusTar.copy(g0.t);
-var CAMPUS_KEY=secs.map(function(x){return x.id;}).indexOf('campus');
+var CAMPUS_KEY=Math.max(0,secs.map(function(x){return x.id;}).indexOf('globe'));
 keys[CAMPUS_KEY].p=campusPos;keys[CAMPUS_KEY].t=campusTar;
 
 [].slice.call(document.querySelectorAll('.campus')).forEach(function(b,_,all){
